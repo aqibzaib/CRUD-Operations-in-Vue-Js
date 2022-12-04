@@ -1,26 +1,49 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<template >
+
+  <!-- <TableData :item="listItems" /> -->
+
+  <CrudCmp />
 </template>
 
+
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+
+// import TableData from './components/TableData.vue'
+import CrudCmp from './components/CrudCmp.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // TableData,
+    CrudCmp
+
+  },
+  data() {
+    return {
+      listItems: [],
+    }
+
+  },
+
+  methods: {
+    async getData() {
+      const res = await fetch("https://jsonplaceholder.typicode.com/users");
+      const finalRes = await res.json();
+      this.listItems = finalRes;
+
+    },
+
+  },
+  created() {
+    // this.getData();
   }
+
+
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
